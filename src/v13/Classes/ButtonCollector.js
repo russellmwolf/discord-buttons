@@ -67,7 +67,7 @@ class ButtonCollector extends Collector {
 
   get endReason() {
     if (this.options.max && this.total >= this.options.max) return 'limit';
-    if (this.options.maxButtons && this.collected.size >= this.options.maxButtons) return 'componentLimit';
+    if (this.options.maxButtons && this.collected.size >= this.options.maxButtons) return 'buttonLimit';
     if (this.options.maxUsers && this.users.size >= this.options.maxUsers) return 'userLimit';
     return null;
   }
