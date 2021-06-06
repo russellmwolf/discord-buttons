@@ -6,7 +6,7 @@ const Util = require('./src/v12/Util');
 
 client.on('ready', () => {
     console.log(client.user.tag)
-    client.guilds.cache.get('728503987866828870').commands.create({ name: 'hi', 'description': 'HI' });
+    //client.guilds.cache.get('728503987866828870').commands.create({ name: 'hi', 'description': 'HI' });
 });
 //client.on('debug', console.log);
 
@@ -30,6 +30,12 @@ client.on('message', async (message) => {
             .addComponent(btn);
 
         let m = await message.channel.send(`Wumpus!!!`, group1);
+
+        let collector = m.createButtonCollector(b => b, { time: 10000 });
+
+        collector.on('collect', b => console.log(b.discordID));
+
+        collector.on('end', b => console.log('end'))
 
         //await wait(1000);
 
@@ -68,7 +74,7 @@ client.on('clickButton', async (button) => {
     await s.edit('hi', null);
 });
 
-client.on('interaction', async (interaction) => {
+/*client.on('interaction', async (interaction) => {
     let btn = new disbut.MessageButton()
         .setEmoji('785062885952192512')
         .setID('d')
@@ -79,7 +85,7 @@ client.on('interaction', async (interaction) => {
     interaction.reply('hi');
     await wait(1000);
     interaction.editReply('hi', btn);
-})
+})*/
 
 client.login('');
 

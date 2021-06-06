@@ -3,10 +3,10 @@ const Collection = require('discord.js').Collection;
 const { Events } = require('discord.js').Constants;
 
 class ButtonCollector extends Collector {
-  constructor(message, filter, options = {}) {
-    super(message.client, filter, options);
+  constructor(data, filter, options = {}) {
+    super(data.client, filter, options);
 
-    this.message = message;
+    this.message = data;
 
     this.users = new Collection();
 
@@ -31,15 +31,25 @@ class ButtonCollector extends Collector {
       this.client.decrementMaxListeners();
     });
 
-    this.on('collect', (button) => {
+    this.on('collect', async (button) => {
       this.total++;
+      if (!button.clicker.user) await button.clicker.fetch();
       this.users.set(button.clicker.user.id, button.clicker.user);
     });
   }
 
   collect(button) {
-    if (button.message.id !== this.message.id) return null;
-    return button.id;
+    if (this.message) {
+      return button.message.id === this.message.id ? button.discordID : null;
+    }
+    return button.channel.id === this.channel.id ? button.discordID : null;
+  }
+
+  dispose(button) {
+    if (this.message) {
+      return button.message.id === this.message.id ? button.discordID : null;
+    }
+    return button.channel.id === this.channel.id ? button.discordID : null;
   }
 
   empty() {
@@ -51,7 +61,7 @@ class ButtonCollector extends Collector {
 
   endReason() {
     if (this.options.max && this.total >= this.options.max) return 'limit';
-    if (this.options.maxButtons && this.collected.size >= this.options.maxButtons) return 'buttonLimit';
+    if (this.options.maxButtons && this.collected.size >= this.options.maxButtons) return 'componentLimit';
     if (this.options.maxUsers && this.users.size >= this.options.maxUsers) return 'userLimit';
     return null;
   }

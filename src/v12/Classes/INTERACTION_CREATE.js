@@ -26,7 +26,7 @@ class ButtonEvent {
             user: this.client.users.resolve(data.guild_id ? data.member.user.id : data.user.id),
             member: this.guild ? this.guild.members.resolve(data.member.user.id) : undefined,
             fetch: async () => {
-                this.clicker.user = this.client.users.resolve(data.guild_id ? data.member.user.id : data.user.id);
+                this.clicker.user = await this.client.users.fetch(data.guild_id ? data.member.user.id : data.user.id);
                 if (this.guild) {
                     this.clicker.member = await this.guild.members.fetch(data.member.user.id);
                 }
