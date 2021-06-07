@@ -1,9 +1,9 @@
-const { Structures } = require("discord.js");
+const Message = require("discord.js").Structures.get('Message');
 const ButtonCollector = require('./ButtonCollector');
 const APIMessage = require('./APIMessage').APIMessage;
 const BaseMessageComponent = require('./interfaces/BaseMessageComponent');
 
-class Message extends Structures.get("Message") {
+class ExtendedMessage extends Message {
 
     _patch(data) {
         super._patch(data);
@@ -51,4 +51,4 @@ class Message extends Structures.get("Message") {
 
 }
 
-module.exports = Message;
+module.exports = ExtendedMessage;

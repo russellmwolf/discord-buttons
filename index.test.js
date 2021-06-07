@@ -4,6 +4,8 @@ const disbut = require('./src/index');
 disbut(client)
 const Util = require('./src/v12/Util');
 
+console.log(disbut)
+
 client.on('ready', () => {
     console.log(client.user.tag)
     //client.guilds.cache.get('728503987866828870').commands.create({ name: 'hi', 'description': 'HI' });
@@ -14,10 +16,10 @@ client.on('message', async (message) => {
     //if (message.author.bot) return;
     if (message.content.startsWith('o')) {
 
-        let e = message.guild.emojis.cache.get('729208650131963946');
+        //let e = message.guild.emojis.cache.get('729208650131963946');
 
         let btn = new disbut.MessageButton()
-            .setEmoji(e)
+            .setLabel(' ')
             .setStyle('gray')
             .setID('testid')
 
@@ -31,11 +33,11 @@ client.on('message', async (message) => {
 
         let m = await message.channel.send(`Wumpus!!!`, group1);
 
-        let collector = m.createButtonCollector(b => b, { time: 10000 });
+        /*let collector = m.createButtonCollector(b => b, { time: 10000 });
 
         collector.on('collect', b => console.log(b.discordID));
 
-        collector.on('end', b => console.log('end'))
+        collector.on('end', b => console.log('end'))*/
 
         //await wait(1000);
 
