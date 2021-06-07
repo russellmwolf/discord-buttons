@@ -9,8 +9,6 @@ module.exports = (client) => {
 
     Events.CLICK_BUTTON = 'clickButton';
 
-    console.log(Events)
-
     if (version < 11 || version === 11) {
         throw new Error('The discord.js version must be v12 or high');
     }
