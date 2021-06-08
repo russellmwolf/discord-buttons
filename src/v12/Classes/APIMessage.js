@@ -1,4 +1,4 @@
-const { APIMessage: dAPIMessage } = require("discord.js");
+const { APIMessage: dAPIMessage, MessageEmbed } = require("discord.js");
 const Util = require('../Util');
 const { MessageComponentTypes } = require('../Constants.js');
 const BaseMessageComponent = require('./interfaces/BaseMessageComponent');
@@ -11,7 +11,17 @@ class sendAPICallback extends dAPIMessage {
             return this;
         }
 
+        if (typeof (this.options.content) === 'object') {
+            this.options = this.options.content;
+            this.options.content = null;
+        }
+
         super.resolveData();
+
+        if (this.options.content instanceof MessageEmbed) {
+            this.data.embed = this.options.content;
+            this.data.content = null;
+        }
 
         if (this.options.flags) {
             this.data.flags = parseInt(this.options.flags);
@@ -107,7 +117,17 @@ class APIMessage extends dAPIMessage {
             return this;
         }
 
+        if (typeof (this.options.content) === 'object') {
+            this.options = this.options.content;
+            this.options.content = null;
+        }
+
         super.resolveData();
+
+        if (this.options.content instanceof MessageEmbed) {
+            this.data.embed = this.options.content;
+            this.data.content = null;
+        }
 
         let components = [];
         let hasActionRow = false;
