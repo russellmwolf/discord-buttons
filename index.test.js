@@ -4,9 +4,11 @@ const disbut = require('./src/index');
 disbut(client)
 const Util = require('./src/v12/Util');
 
+console.log(disbut)
+
 client.on('ready', () => {
     console.log(client.user.tag)
-    client.guilds.cache.get('728503987866828870').commands.create({ name: 'hi', 'description': 'HI' });
+    //client.guilds.cache.get('728503987866828870').commands.create({ name: 'hi', 'description': 'HI' });
 });
 //client.on('debug', console.log);
 
@@ -14,14 +16,12 @@ client.on('message', async (message) => {
     //if (message.author.bot) return;
     if (message.content.startsWith('o')) {
 
-        let e = message.guild.emojis.cache.get('729208650131963946');
+        //let e = message.guild.emojis.cache.get('729208650131963946');
 
         let btn = new disbut.MessageButton()
-            .setEmoji(e)
+            .setLabel(' ')
             .setStyle('gray')
             .setID('testid')
-
-        console.log(btn)
 
         let group1 = new disbut.MessageActionRow()
             .addComponent(btn)
@@ -31,7 +31,13 @@ client.on('message', async (message) => {
             .addComponent(btn)
             .addComponent(btn);
 
-        let m = await message.channel.send(`Wumpus!!!`, { component: group1 });
+        let m = await message.channel.send(`Wumpus!!!`, group1);
+
+        /*let collector = m.createButtonCollector(b => b, { time: 10000 });
+
+        collector.on('collect', b => console.log(b.discordID));
+
+        collector.on('end', b => console.log('end'))*/
 
         //await wait(1000);
 
@@ -65,22 +71,23 @@ client.on('clickButton', async (button) => {
     let row = new disbut.MessageActionRow()
         .addComponent(btn)
 
-    await button.channel.send('hi', { components: row });
-    await button.reply.send('hi', { components: row });
+    let s = await button.think();
+    await wait(1000);
+    await s.edit('hi', null);
 });
 
-client.on('interaction', async (interaction) => {
+/*client.on('interaction', async (interaction) => {
     let btn = new disbut.MessageButton()
-    .setEmoji('785062885952192512')
-    .setID('d')
-    .setStyle('blurple');
+        .setEmoji('785062885952192512')
+        .setID('d')
+        .setStyle('blurple');
 
     interaction.user.send('GG', btn);
 
     interaction.reply('hi');
     await wait(1000);
     interaction.editReply('hi', btn);
-})
+})*/
 
 client.login('');
 
