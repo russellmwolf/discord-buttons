@@ -12,7 +12,7 @@ const disbut = require('discord-buttons');
 disbut(client);
 ```
 
-Then, you can use [disbut.MessageButton](../documentation/constructors/message-button) and [disbut.MessageActionRow](../documentation/constructors/message-action-row) in your main file.
+Then, you can use [disbut.MessageButton](./constructors/message-button) and [disbut.MessageActionRow](./constructors/message-action-row) in your main file.
 
 > Angelo, I use a command handler!!
 
