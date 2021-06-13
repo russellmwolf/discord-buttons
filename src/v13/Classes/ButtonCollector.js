@@ -39,7 +39,7 @@ class ButtonCollector extends Collector {
 
     this.on('collect', async (data) => {
       this.total++;
-      if (!button.clicker.user) await button.clicker.fetch();
+      if (!data.clicker.user) await data.clicker.fetch();
       this.users.set(data.clicker.user.id, data.clicker.user);
     });
   }
