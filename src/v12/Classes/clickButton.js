@@ -23,6 +23,7 @@ class MessageComponent {
         this.channel = client.channels.cache.get(data.channel_id);
 
         this.clicker = {
+            id: data.guild_id ? data.member.user.id : data.user.id,
             user: this.client.users.resolve(data.guild_id ? data.member.user.id : data.user.id),
             member: this.guild ? this.guild.members.resolve(data.member.user.id) : undefined,
             fetch: async () => {
