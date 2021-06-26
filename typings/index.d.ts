@@ -215,6 +215,15 @@ declare module 'discord-buttons' {
     }
 
 }
+
+declare module 'discord.js'
+{
+    export interface ClientEvents
+    {
+        clickButton: [MessageComponent]
+    }
+}
+
 /*
   Base: https://github.com/AngeloCore/discord-buttons/pull/64/commits/f936d59b0d72bf5a9ae448ebb236957c1dc9ab37#diff-4f45caa500ef03d94d3c2bfa556caa1642df95d4e2b980d76b876a8fd2e8c522
 */
