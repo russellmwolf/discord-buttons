@@ -19,7 +19,7 @@ declare module 'discord.js' {
     {
         clickButton: [MessageComponent]
     }
-    
+
     export interface MessageOptions
     {
         component?: MessageButton | MessageActionRow;
@@ -73,14 +73,6 @@ declare module 'discord-buttons' {
         DESTRUCTIVE = 4,
         LINK = 5
     }
-
-    export enum MessageButtonStylesAliases {
-        PRIMARY = 1,
-        SECONDARY = 2,
-        SUCCESS = 3,
-        DESTRUCTIVE = 4,
-        LINK = 5
-    }
     
     export type MessageButtonStyle = keyof typeof MessageButtonStyles;
     
@@ -94,7 +86,7 @@ declare module 'discord-buttons' {
     
     export interface MessageButtonOptions {
         type: MessageComponentTypes.BUTTON,
-        style: MessageButtonStyles | MessageButtonStylesAliases,
+        style: MessageButtonStyles,
         label?: string,
         disabled?: boolean,
         emoji?: string | GuildButtonEmoji,
@@ -105,7 +97,7 @@ declare module 'discord-buttons' {
     
     export interface MessageButtonData {
         type?: MessageComponentTypes.BUTTON,
-        style: MessageButtonStyles | MessageButtonStylesAliases | number,
+        style: MessageButtonStyles | number,
         label?: string,
         disabled?: boolean,
         emoji?: GuildButtonEmoji,
@@ -179,6 +171,12 @@ declare module 'discord-buttons' {
         public custom_id: string;
         public setStyle(style: MessageButtonStyleResolvable): MessageButton;
         public setLabel(label: string): MessageButton;
+        /**
+         * 
+         * @param disabled 
+         * @description
+         * Disables the button
+         */
         public setDisabled(disabled?: boolean): MessageButton;
         public setURL(url: string): MessageButton;
         public setID(id: string): MessageButton;
