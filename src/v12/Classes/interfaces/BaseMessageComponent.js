@@ -2,6 +2,7 @@ const { MessageComponentTypes } = require('../../Constants');
 const { resolveType } = require('../../Util');
 
 class BaseMessageComponent {
+
     constructor(data) {
         this.type = 'type' in data ? resolveType(data.type) : null;
     }

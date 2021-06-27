@@ -3,6 +3,7 @@ const Collection = require('discord.js').Collection;
 const { Events } = require('discord.js').Constants;
 
 class ButtonCollector extends Collector {
+
   constructor(data, filter, options = {}) {
     super(data.client, filter, options);
 

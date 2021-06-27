@@ -1,4 +1,8 @@
-const { MessageButtonStyles, MessageButtonStylesAliases, MessageComponentTypes } = require('./Constants.js');
+const {
+    MessageButtonStyles,
+    MessageButtonStylesAliases,
+    MessageComponentTypes
+} = require('./Constants.js');
 
 module.exports = {
     resolveStyle(style) {

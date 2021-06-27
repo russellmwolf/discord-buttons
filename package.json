@@ -1,6 +1,6 @@
 {
   "name": "discord-buttons",
-  "version": "3.2.5-dev",
+  "version": "3.3.0-dev.1",
   "description": "Discord.js buttons",
   "main": "src/index.js",
   "types": "typings/index.d.ts",
@@ -23,10 +23,10 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AngeloCore/discord-buttons.git"
+    "url": "git+https://github.com/discord-buttons/discord-buttons.git"
   },
   "bugs": {
-    "url": "https://github.com/AngeloCore/discord-buttons/issues"
+    "url": "https://github.com/discord-buttons/discord-buttons/issues"
   },
   "homepage": "https://discord-buttons.js.org",
   "devDependencies": {

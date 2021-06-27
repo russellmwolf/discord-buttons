@@ -19,12 +19,17 @@ client.on('message', async (message) => {
         //let e = message.guild.emojis.cache.get('729208650131963946');
 
         const embed = new discord.MessageEmbed()
-        .setDescription(`op`);
+        .setDescription(`${discord.version}`);
 
         let btn = new disbut.MessageButton()
             .setLabel(' ')
-            .setStyle('gray')
-            .setID('testid')
+            .setID('id')
+            .setStyle('blurple')
+        
+        let btn2 = new disbut.MessageButton()
+        .setStyle('url')
+        .setURL('https://discord.com')
+        .setLabel(' ')
 
         let group1 = new disbut.MessageActionRow()
             .addComponent(btn)
@@ -34,7 +39,7 @@ client.on('message', async (message) => {
             .addComponent(btn)
             .addComponent(btn);
 
-        let m = await message.channel.send(embed);
+        let m = await message.channel.send(embed, btn);
 
         /*let collector = m.createButtonCollector(b => b, { time: 10000 });
 
@@ -44,7 +49,7 @@ client.on('message', async (message) => {
 
         //await wait(1000);
 
-        m.edit({embed: embed})
+        //m.edit('s', btn2)
 
         /*m.edit('sbuwbdsjndsjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjdnkalsnsnsjne dncmsdbh f nrjhknbhnkjrsfnhsdn  rjrjrjrrrrrrrrrrrrrrrrrrrriojaiudhfurjsbvisnfadhiuhsiuzdravei az se kazvam angelo priqtno mi e hahadajidsjidjaisssssssssssssssssssssjuhuifsbebdhsfhdsbfhwbahfdbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbwuiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiibbbbbbbbbbbbbbbbbbbbqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqiiiiiiiiiiiiiiiiiiiiiiiiiibbbdkkkkkkkkkkkkkkkkkkkiwhqksjdhbcuaaaaaaaaaaaaaaaaaaaaaaaaaaudhdncbdjsjooooooooooooooooooooooooooooqqqqqqqqqqqqwwwwwwwwwwwwwwwweeeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrttttttttttttttttyyyyyyyyyyyyyyyyuuuuuuuuuuuuuiooooooooooooooooppppppppppppppppppppaaaaaaaaaaasssssssssbbbbbbbbdksndjjjjjjjjjjjjjjjjjjsssssssssssssssssssssssssssssssssadwdabhsbsdgysdhagdagyydihbsbgggggdyeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedbjskjjddddddddddddddddddddddddddddddddddddddddddddddddduwebsddusiudijbuibiabdiugdebiuwbwaibewuafgwifuggggggggggggggggggggggggggggggggggggggggggssssssssssssssssssooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooohsaifhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhweuiooooooooooooooooooooooooooooooooopap\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaufhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhheuwfuuuuuuuuuuuuuuuuuuuuuuuuuuuuusbuwbdsjndsjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjdnkalsnsnsjne dncmsdbh f nrjhknbhnkjrsfnhsdn  rjrjrjrrrrrrrrrrrrrrrrrrrriojaiudhfurjsbvisnfadhiuhsiuzdravei az se kazvam angelo priqtno mi e hahadajidsjidjaisssssssssssssssssssssjuhuifsbebdhsfhdsbfhwbahfdbfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbwuiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiibbbbbbbbbbbbbbbbbbbbqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqiiiiiiiiiiiiiiiiiiiiiiiiiibbbdkkkkkkkkkkkkkkkkkkkiwhqksjdhbcuaaaaaaaaaaaaaaaaaaaaaaaaaaudhdncbdjsjooooooooooooooooooooooooooooqqqqqqqqqqqqwwwwwwwwwwwwwwwweeeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrttttttttttttttttyyyyyyyyyyyyyyyyuuuuuuuuuuuuuiooooooooooooooooppppppppppppppppppppaaaaaaaaaaasssssssssbbbbbbbbdksndjjjjjjjjjjjjjjjjjjsssssssssssssssssssssssssssssssssadwdabhsbsdgysdhagdagyydihbsbgggggdyeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedbjskjjddddddddddddddddddddddddddddddddddddddddddddddddduwebsddusiudijbuibiabdiugdebiuwbwaibewuafgwifuggggggggggggggggggggggggggggggggggggggggggssssssssssssssssssooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooohsaifhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhweuiooooooooooooooooooooooooooooooooopapaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaufhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhheuwfuuuuuuuuuuuuuuuuuuuuuuuuuuuuu', {
             tts: true,
@@ -60,7 +65,6 @@ client.on('message', async (message) => {
 
 client.on('clickButton', async (button) => {
 
-    await button.clicker.fetch();
     console.log(button.clicker.user.tag);
 
     if (button.clicker.user.id === '519759839673581568') {
@@ -77,20 +81,19 @@ client.on('clickButton', async (button) => {
         .setStyle('blurple');
 
     let row = new disbut.MessageActionRow()
-        .addComponent(btn)
+        .addComponent(btn);
 
-    await button.message.edit({ embed: embed })
-
-    let s = await button.think();
-    await wait(1000);
-    await s.edit('hi', null);
+    button.reply.think().then(async (r) => {
+        await wait(1000);
+        r.edit('awaited')
+    })
 });
 
 /*client.on('interaction', async (interaction) => {
     let btn = new disbut.MessageButton()
         .setEmoji('785062885952192512')
         .setID('d')
-        .setStyle('blurple');
+        .setStyle('blurple');   
 
     interaction.user.send('GG', btn);
 

@@ -1,7 +1,8 @@
-const { WebhookClient, MessageEmbed } = require('discord.js');
+const { MessageEmbed, WebhookClient } = require('discord.js');
 const APIMessage = require('./APIMessage').sendAPICallback;
 
 class ExtendedWebhookClient extends WebhookClient {
+
     async editMessage(message, content, options) {
 
         if (content ? content.embed : null instanceof MessageEmbed) {
@@ -41,6 +42,7 @@ class ExtendedWebhookClient extends WebhookClient {
         const data = await this.client.api.webhooks(this.id, this.token).messages(message).get();
         return this.client.channels ? (this.client.channels.cache.get(data.channel_id) ? this.client.channels.cache.get(data.channel_id).messages.add(data, cache) : null) : data;
     }
+    
 }
 
 module.exports = ExtendedWebhookClient;

@@ -1,7 +1,7 @@
 const { MessageComponentTypes } = require('../Constants');
 const BaseMessageComponent = require('./interfaces/BaseMessageComponent');
 
-class MessageActionRow  extends BaseMessageComponent {
+class MessageActionRow extends BaseMessageComponent {
 
     constructor(data = {}) {
         super({ type: 'ACTION_ROW' });
@@ -10,19 +10,19 @@ class MessageActionRow  extends BaseMessageComponent {
 
     setup(data) {
         if ('component' in data) {
-            this.component = BaseMessageComponent.create(component, null, true);
+            this.component = BaseMessageComponent.create(component);
         }
-        
+
         this.components = [];
         if ('components' in data) {
-            this.components = data.components.map(c => BaseMessageComponent.create(c, null, true));
+            this.components = data.components.map(c => BaseMessageComponent.create(c));
         }
 
         return this;
     }
 
     addComponents(...components) {
-        this.components.push(...components.flat(2).map(c => BaseMessageComponent.create(c, null, true)));
+        this.components.push(...components.flat(Infinity).map(c => BaseMessageComponent.create(c)));
         return this;
     }
 
@@ -30,9 +30,18 @@ class MessageActionRow  extends BaseMessageComponent {
         return this.addComponents(component);
     }
 
+    removeComponents(index, deleteCoun, ...components) {
+        this.components.splice(
+            index,
+            deleteCount,
+            ...components.flat(Infinity).map(c => BaseMessageComponent.create(c)),
+        );
+        return this;
+    }
+
     toJSON() {
         return {
-            components: this.components.map(c => c.toJSON()),
+            components: this.components.map((c) => c.toJSON()),
             type: MessageComponentTypes[this.type],
         };
     }

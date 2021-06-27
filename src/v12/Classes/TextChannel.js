@@ -8,7 +8,7 @@ class ExtendedTextChannel extends TextChannel {
         const GuildMember = Structures.get('GuildMember');
 
         if (this instanceof User || this instanceof GuildMember) {
-            return this.createDM().then(dm => dm.send(content, options));
+            return this.createDM().then((dm) => dm.send(content, options));
         }
 
         let apiMessage;

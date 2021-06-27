@@ -7,7 +7,7 @@ class ExtendedMessage extends Message {
 
     _patch(data) {
         super._patch(data);
-        this.components = (data.components || []).map(c => BaseMessageComponent.create(c, this.client));
+        this.components = (data.components || []).map(c => BaseMessageComponent.create(c));
         return this;
     }
 
@@ -36,10 +36,9 @@ class ExtendedMessage extends Message {
         );
     }
 
-    edit(content, options = {}) {
-        if (this.components.length > 0 && options !== null && options.component === undefined && options.components === undefined) {
-            options.components = this.components.map(c => BaseMessageComponent.create(c, this.client));
-        }
+    edit(content, options) {
+        if (options === null && options !== undefined)
+            options = { components: null }
         const { data } =
             content instanceof APIMessage ? content.resolveData() : APIMessage.create(this, content, options).resolveData();
         return this.client.api.channels[this.channel.id].messages[this.id].patch({ data }).then(d => {
