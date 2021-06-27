@@ -10,7 +10,9 @@ import discord, {
     CollectorOptions,
     APIMessageContentResolvable,
     MessageEmbed,
-    MessageAttachment
+    MessageAttachment,
+    StringResolvable,
+    SplitOptions
 } from 'discord.js';
 
 declare module 'discord.js' {
@@ -47,7 +49,7 @@ declare module 'discord.js' {
         deleteMessage(message: string): Promise<void>;
         fetchMessage(message: string, cache?: boolean): Promise<any>;
     }
-    
+
     export interface PartialTextBasedChannelFields
     {
         send(
@@ -280,14 +282,32 @@ declare module 'discord-buttons' {
     export type Awaited<T> = T | Promise<T>;
     
     export interface ExtendedTextChannel extends discord.TextChannel {
-        send(content: APIMessageContentResolvable | MessageAdditions | (MessageOptions & { split?: false; })): Promise<Message>;
+        send(content: APIMessageContentResolvable | (MessageOptions & { split?: false }) | MessageAdditions,): Promise<Message>;
+        send(options: MessageOptions & { split: true | SplitOptions }): Promise<Message[]>;
+        send(options: MessageOptions | discord.APIMessage): Promise<Message | Message[]>;
+        send(content: StringResolvable, options: (MessageOptions & { split?: false }) | MessageAdditions): Promise<Message>;
+        send(content: StringResolvable, options: MessageOptions & { split: true | SplitOptions }): Promise<Message[]>;
+        send(content: StringResolvable, options: MessageOptions): Promise<Message | Message[]>;
+        send(content: StringResolvable, options: MessageButton | MessageActionRow): Promise<Message | Message[]>;
     }
-    
+
     export interface ExtendedDMChannel extends discord.DMChannel {
-        send(content: APIMessageContentResolvable | (MessageOptions & { split?: false }) | MessageAdditions): Promise<Message>;
+        send(content: APIMessageContentResolvable | (MessageOptions & { split?: false }) | MessageAdditions,): Promise<Message>;
+        send(options: MessageOptions & { split: true | SplitOptions }): Promise<Message[]>;
+        send(options: MessageOptions | discord.APIMessage): Promise<Message | Message[]>;
+        send(content: StringResolvable, options: (MessageOptions & { split?: false }) | MessageAdditions): Promise<Message>;
+        send(content: StringResolvable, options: MessageOptions & { split: true | SplitOptions }): Promise<Message[]>;
+        send(content: StringResolvable, options: MessageOptions): Promise<Message | Message[]>;
+        send(content: StringResolvable, options: MessageButton | MessageActionRow): Promise<Message | Message[]>;
     }
-    
+
     export interface ExtendedNewsChannel extends discord.NewsChannel {
-        send(content: APIMessageContentResolvable | (MessageOptions & { split?: false }) | MessageAdditions): Promise<Message>;
+        send(content: APIMessageContentResolvable | (MessageOptions & { split?: false }) | MessageAdditions,): Promise<Message>;
+        send(options: MessageOptions & { split: true | SplitOptions }): Promise<Message[]>;
+        send(options: MessageOptions | discord.APIMessage): Promise<Message | Message[]>;
+        send(content: StringResolvable, options: (MessageOptions & { split?: false }) | MessageAdditions): Promise<Message>;
+        send(content: StringResolvable, options: MessageOptions & { split: true | SplitOptions }): Promise<Message[]>;
+        send(content: StringResolvable, options: MessageOptions): Promise<Message | Message[]>;
+        send(content: StringResolvable, options: MessageButton | MessageActionRow): Promise<Message | Message[]>;
     }
 }
