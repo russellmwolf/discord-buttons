@@ -122,7 +122,7 @@ declare class MessageActionRow extends BaseMessageComponent {
 }
 
 declare class MessageButton extends BaseMessageComponent {
-    constructor(data: MessageButton | MessageButtonData | MessageButtonOptions);
+    constructor(data?: MessageButton | MessageButtonData | MessageButtonOptions);
     public setup(data: any): MessageButton;
     public style: MessageButtonStyles;
     public label: string;
