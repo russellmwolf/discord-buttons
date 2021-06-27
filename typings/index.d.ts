@@ -238,8 +238,34 @@ interface ExtendedNewsChannel extends discord.NewsChannel {
 }
 
 declare module 'discord.js' {
-    export interface ClientEvents {
+    export interface ClientEvents 
+    {
         clickButton: [MessageComponent]
+    }
+    export interface MessageOptions
+    {
+        component?: MessageButton | MessageActionRow;
+        components?: MessageActionRow[];
+        button?: MessageButton | MessageButton[];
+        buttons?: MessageButton | MessageButton[];
+    }
+    export interface Message
+    {
+        components: MessageActionRow[];
+        createButtonCollector(
+            filter: CollectorFilter,
+            options?: AwaitMessageButtonOptions
+        ): ButtonCollector;
+        awaitButtons(
+            filter: CollectorFilter,
+            options?: AwaitMessageButtonOptions
+        ): Promise<Collection<Snowflake, MessageComponent>>;
+    }
+    export interface WebhookClient
+    {
+        editMessage(message: string, content: any, options?: {}): Promise<any>;
+        deleteMessage(message: string): Promise<void>;
+        fetchMessage(message: string, cache?: boolean): Promise<any>;
     }
 }
 
