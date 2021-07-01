@@ -124,7 +124,7 @@ client.on('clickMenu', async (menu) => {
     interaction.editReply('hi', btn);
 })*/
 
-client.login('');
+client.login('Nzg0MDk5MTI1OTkzNjY4Njkw.X8kXNw.1La2nGJ-K4Deo23N0et0wOflC8U');
 
 function wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

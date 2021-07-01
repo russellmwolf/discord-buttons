@@ -10,8 +10,7 @@ class MessageComponent {
 
     this.id = data.data.custom_id;
 
-    if (menu)
-      this.values = data.data.values || [];
+    if (menu) this.values = data.data.values || [];
 
     this.version = data.version;
 

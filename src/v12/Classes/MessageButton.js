@@ -16,8 +16,7 @@ class MessageButton extends BaseMessageComponent {
 
     this.disabled = 'disabled' in data ? data.disabled : false;
 
-    if ('emoji' in data)
-      this.setEmoji(data.emoji);
+    if ('emoji' in data) this.setEmoji(data.emoji);
 
     if ('url' in data && data.url) this.url = resolveString(data.url);
     else this.url = undefined;
@@ -56,27 +55,20 @@ class MessageButton extends BaseMessageComponent {
   }
 
   setEmoji(emoji, animated) {
-
-    if (!emoji)
-      throw new Error('MISSING_EMOJI: On this option was used `.setEmoji` method without emoji')
+    if (!emoji) throw new Error('MISSING_EMOJI: On this option was used `.setEmoji` method without emoji');
 
     this.emoji = {
       id: undefined,
-      name: undefined
-    }
+      name: undefined,
+    };
 
-    if (!isNaN(emoji))
-      this.emoji.id = emoji
-    if (!isNaN(emoji.id))
-      this.emoji.id = emoji.id
-    if (emoji.name)
-      this.emoji.name = emoji.name
+    if (!isNaN(emoji)) this.emoji.id = emoji;
+    if (!isNaN(emoji.id)) this.emoji.id = emoji.id;
+    if (emoji.name) this.emoji.name = emoji.name;
 
-    if (!this.emoji.id && !this.emoji.name)
-      this.emoji.name = emoji;
+    if (!this.emoji.id && !this.emoji.name) this.emoji.name = emoji;
 
-    if (typeof (animated) === 'boolean')
-      this.emoji.animated = animated;
+    if (typeof animated === 'boolean') this.emoji.animated = animated;
 
     return this;
   }

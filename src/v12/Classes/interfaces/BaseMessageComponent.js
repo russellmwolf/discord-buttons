@@ -7,7 +7,6 @@ class BaseMessageComponent {
   }
 
   static create(data) {
-
     let component;
     if (typeof data.type === 'string' && !data.type === 'SELECT_MENU_OPTION') {
       type = MessageComponentTypes[type];

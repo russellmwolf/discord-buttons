@@ -10,13 +10,11 @@ class MessageMenuOption extends BaseMessageComponent {
   }
 
   setup(data) {
-
     this.label = 'label' in data && data.label ? resolveString(data.label) : undefined;
 
     this.value = 'value' in data && data.value ? resolveString(data.value) : undefined;
 
-    if ('emoji' in data)
-      this.setEmoji(data.emoji);
+    if ('emoji' in data) this.setEmoji(data.emoji);
 
     this.description = 'description' in data ? data.description : undefined;
 
@@ -44,39 +42,31 @@ class MessageMenuOption extends BaseMessageComponent {
   }
 
   setEmoji(emoji, animated) {
-
-    if (!emoji)
-      throw new Error('MISSING_EMOJI: On this option was used `.setEmoji` method without emoji')
+    if (!emoji) throw new Error('MISSING_EMOJI: On this option was used `.setEmoji` method without emoji');
 
     this.emoji = {
       id: undefined,
-      name: undefined
-    }
+      name: undefined,
+    };
 
-    if (!isNaN(emoji))
-      this.emoji.id = emoji
-    if (!isNaN(emoji.id))
-      this.emoji.id = emoji.id
-    if (emoji.name)
-      this.emoji.name = emoji.name
+    if (!isNaN(emoji)) this.emoji.id = emoji;
+    if (!isNaN(emoji.id)) this.emoji.id = emoji.id;
+    if (emoji.name) this.emoji.name = emoji.name;
 
-    if (!this.emoji.id && !this.emoji.name)
-      this.emoji.name = emoji;
+    if (!this.emoji.id && !this.emoji.name) this.emoji.name = emoji;
 
-    if (typeof (animated) === 'boolean')
-      this.emoji.animated = animated;
+    if (typeof animated === 'boolean') this.emoji.animated = animated;
 
     return this;
   }
 
   toJSON() {
-
     return {
       label: this.label,
       value: this.value,
       default: this.default,
       emoji: this.emoji,
-      description: this.description
+      description: this.description,
     };
   }
 }

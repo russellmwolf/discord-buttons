@@ -36,7 +36,9 @@ class sendAPICallback extends dAPIMessage {
       if (this.options.type === MessageComponentTypes.ACTION_ROW) {
         components.push({
           type: MessageComponentTypes.ACTION_ROW,
-          components: this.options.components.map((b) => BaseMessageComponent.create(b.type === MessageComponentTypes.BUTTON ? Util.resolveButton(b) : Util.resolveMenu(b))),
+          components: this.options.components.map((b) =>
+            BaseMessageComponent.create(b.type === MessageComponentTypes.BUTTON ? Util.resolveButton(b) : Util.resolveMenu(b)),
+          ),
         });
         hasActionRow = true;
       } else if (this.options.type === MessageComponentTypes.BUTTON) {
@@ -47,8 +49,8 @@ class sendAPICallback extends dAPIMessage {
       } else if (this.options.type === MessageComponentTypes.SELECT_MENU) {
         components.push({
           type: MessageComponentTypes.ACTION_ROW,
-          components: [BaseMessageComponent.create(Util.resolveMenu(this.options))]
-        })
+          components: [BaseMessageComponent.create(Util.resolveMenu(this.options))],
+        });
       }
     }
 
@@ -80,7 +82,11 @@ class sendAPICallback extends dAPIMessage {
             ...this.options.components.map((c) => {
               let buttons = [];
 
-              buttons.push(...c.components.map((b) => BaseMessageComponent.create(b.type === MessageComponentTypes.BUTTON ? Util.resolveButton(b) : Util.resolveMenu(b))));
+              buttons.push(
+                ...c.components.map((b) =>
+                  BaseMessageComponent.create(b.type === MessageComponentTypes.BUTTON ? Util.resolveButton(b) : Util.resolveMenu(b)),
+                ),
+              );
 
               return {
                 type: MessageComponentTypes.ACTION_ROW,
@@ -92,7 +98,9 @@ class sendAPICallback extends dAPIMessage {
       } else {
         components.push({
           type: MessageComponentTypes.ACTION_ROW,
-          components: this.options.components.components.map((b) => BaseMessageComponent.create(b.type === MessageComponentTypes.BUTTON ? Util.resolveButton(b) : Util.resolveMenu(b))),
+          components: this.options.components.components.map((b) =>
+            BaseMessageComponent.create(b.type === MessageComponentTypes.BUTTON ? Util.resolveButton(b) : Util.resolveMenu(b)),
+          ),
         });
       }
     }
@@ -172,7 +180,9 @@ class APIMessage extends dAPIMessage {
       if (this.options.type === MessageComponentTypes.ACTION_ROW) {
         components.push({
           type: MessageComponentTypes.ACTION_ROW,
-          components: this.options.components.map((b) => BaseMessageComponent.create(b.type === MessageComponentTypes.BUTTON ? Util.resolveButton(b) : Util.resolveMenu(b))),
+          components: this.options.components.map((b) =>
+            BaseMessageComponent.create(b.type === MessageComponentTypes.BUTTON ? Util.resolveButton(b) : Util.resolveMenu(b)),
+          ),
         });
         hasActionRow = true;
       } else if (this.options.type === MessageComponentTypes.BUTTON) {
@@ -183,8 +193,8 @@ class APIMessage extends dAPIMessage {
       } else if (this.options.type === MessageComponentTypes.SELECT_MENU) {
         components.push({
           type: MessageComponentTypes.ACTION_ROW,
-          components: [BaseMessageComponent.create(Util.resolveMenu(this.options))]
-        })
+          components: [BaseMessageComponent.create(Util.resolveMenu(this.options))],
+        });
       }
     }
 
@@ -216,7 +226,11 @@ class APIMessage extends dAPIMessage {
             ...this.options.components.map((c) => {
               let buttons = [];
 
-              buttons.push(...c.components.map((b) => BaseMessageComponent.create(b.type === MessageComponentTypes.BUTTON ? Util.resolveButton(b) : Util.resolveMenu(b))));
+              buttons.push(
+                ...c.components.map((b) =>
+                  BaseMessageComponent.create(b.type === MessageComponentTypes.BUTTON ? Util.resolveButton(b) : Util.resolveMenu(b)),
+                ),
+              );
 
               return {
                 type: MessageComponentTypes.ACTION_ROW,
@@ -228,7 +242,9 @@ class APIMessage extends dAPIMessage {
       } else {
         components.push({
           type: MessageComponentTypes.ACTION_ROW,
-          components: this.options.components.components.map((b) => BaseMessageComponent.create(b.type === MessageComponentTypes.BUTTON ? Util.resolveButton(b) : Util.resolveMenu(b))),
+          components: this.options.components.components.map((b) =>
+            BaseMessageComponent.create(b.type === MessageComponentTypes.BUTTON ? Util.resolveButton(b) : Util.resolveMenu(b)),
+          ),
         });
       }
     }
