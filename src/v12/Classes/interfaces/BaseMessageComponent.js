@@ -10,7 +10,7 @@ class BaseMessageComponent {
     static create(data) {
         let component;
 
-        if (typeof (data.type) === 'string') {
+        if (typeof (data.type) === 'string' && !data.type === 'SELECT_MENU_OPTION') {
             type = MessageComponentTypes[type];
         }
 
@@ -25,8 +25,16 @@ class BaseMessageComponent {
                 component = new MessageButton(data);
                 break;
             }
-            default:
-                throw new SyntaxError('INVALID_TYPE: Invalid MessageComponentType');
+            case MessageComponentTypes.SELECT_MENU: {
+                const MessageMenu = require('../MessageMenu');
+                component = new MessageMenu(data);
+                break;
+            }
+            case 'SELECT_MENU_OPTION': {
+                const MessageMenuOption = require('../MessageMenuOption');
+                component = new MessageMenuOption(data);
+                break;
+            }
         }
         return component;
     }

@@ -19,17 +19,15 @@ client.on('message', async (message) => {
         //let e = message.guild.emojis.cache.get('729208650131963946');
 
         const embed = new discord.MessageEmbed()
-        .setDescription(`${discord.version}`);
+        .setDescription(`${discord.version}`)
 
         let btn = new disbut.MessageButton()
             .setLabel(' ')
             .setID('id')
             .setStyle('blurple')
-        
+
         let btn2 = new disbut.MessageButton()
-        .setStyle('url')
-        .setURL('https://discord.com')
-        .setLabel(' ')
+        .setStyle()
 
         let group1 = new disbut.MessageActionRow()
             .addComponent(btn)
@@ -102,7 +100,7 @@ client.on('clickButton', async (button) => {
     interaction.editReply('hi', btn);
 })*/
 
-client.login('');
+client.login('Nzg0MDk5MTI1OTkzNjY4Njkw.X8kXNw.LOR80E8ABPOqODqimvlQYcu6ZW4');
 
 function wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

@@ -30,7 +30,7 @@ class MessageActionRow extends BaseMessageComponent {
         return this.addComponents(component);
     }
 
-    removeComponents(index, deleteCoun, ...components) {
+    removeComponents(index, deleteCount, ...components) {
         this.components.splice(
             index,
             deleteCount,
