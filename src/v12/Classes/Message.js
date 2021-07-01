@@ -6,7 +6,11 @@ const BaseMessageComponent = require('./interfaces/BaseMessageComponent');
 class ExtendedMessage extends Message {
   _patch(data) {
     super._patch(data);
-    this.components = (data.components || []).map((c) => BaseMessageComponent.create(c));
+    if (data.components && Array.isArray(data.components) && data.components.length > 0) {
+      this.components = data.components.map((c) => BaseMessageComponent.create(c));
+    } else {
+      this.components = [];
+    }
     return this;
   }
 

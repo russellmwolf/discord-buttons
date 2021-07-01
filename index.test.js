@@ -19,25 +19,41 @@ client.on('message', async (message) => {
         //let e = message.guild.emojis.cache.get('729208650131963946');
 
         const embed = new discord.MessageEmbed()
-        .setDescription(`${discord.version}`)
+            .setDescription(`${discord.version}`)
+
+        let option = new disbut.MessageMenuOption()
+            .setLabel('op')
+            .setValue('hi')
+            .setDescription('ss')
+            .setEmoji('❌')
+
+        let reload = new disbut.MessageMenuOption()
+            .setLabel('reload')
+            .setEmoji('780988312172101682')
+            .setValue('reload')
+
+        let select = new disbut.MessageMenu()
+            .setID('hey')
+            .addOption(option)
+            .addOption(reload)
+            // .setMaxValues(2)
+            .setPlaceholder('opla')
 
         let btn = new disbut.MessageButton()
             .setLabel(' ')
             .setID('id')
             .setStyle('blurple')
-
-        let btn2 = new disbut.MessageButton()
-        .setStyle()
+            .setEmoji('❌')
 
         let group1 = new disbut.MessageActionRow()
             .addComponent(btn)
-            .addComponent(btn);
 
         let group2 = new disbut.MessageActionRow()
-            .addComponent(btn)
-            .addComponent(btn);
+            .addComponent(select);
 
-        let m = await message.channel.send(embed, btn);
+        let m = await message.channel.send('hi', { components: [group2, group1] });
+
+        // console.log(m.components[0].components[0].options)
 
         /*let collector = m.createButtonCollector(b => b, { time: 10000 });
 
@@ -87,6 +103,14 @@ client.on('clickButton', async (button) => {
     })
 });
 
+client.on('clickMenu', async (menu) => {
+    // let reply = await menu.reply.think();
+
+    if (menu.values[0] === 'reload') {
+        menu.message.update('hey', menu.message.components)
+    }
+})
+
 /*client.on('interaction', async (interaction) => {
     let btn = new disbut.MessageButton()
         .setEmoji('785062885952192512')
@@ -100,7 +124,7 @@ client.on('clickButton', async (button) => {
     interaction.editReply('hi', btn);
 })*/
 
-client.login('Nzg0MDk5MTI1OTkzNjY4Njkw.X8kXNw.LOR80E8ABPOqODqimvlQYcu6ZW4');
+client.login('');
 
 function wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

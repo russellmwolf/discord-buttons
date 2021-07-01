@@ -1,3 +1,5 @@
+const MessageButton = require('./MessageButton');
+const MessageMenu = require('./MessageMenu');
 const { MessageComponentTypes } = require('../Constants');
 const BaseMessageComponent = require('./interfaces/BaseMessageComponent');
 
@@ -36,7 +38,7 @@ class MessageActionRow extends BaseMessageComponent {
 
   toJSON() {
     return {
-      components: this.components.map((c) => c.toJSON()),
+      components: this.components ? this.components.map((c) => (c instanceof MessageButton || c instanceof MessageMenu) ? c.toJSON() : c) : undefined,
       type: MessageComponentTypes[this.type],
     };
   }

@@ -1,66 +1,92 @@
 const { MessageComponentTypes } = require('../Constants.js');
 const BaseMessageComponent = require('./interfaces/BaseMessageComponent');
-const { resolveString } = require('discord.js').Util;
-const { resolveMaxValues, resolveMinValues, resolveMenuOptions } = require('../Util');
+const { resolveMaxValues, resolveMinValues, verifyString } = require('../Util');
 
 class MessageMenu extends BaseMessageComponent {
-  constructor(data = {}) {
-    super({ type: 'SELECT_MENU' });
-    this.setup(data);
-  }
-
-  setup(data) {
-    this.placeholder = 'placeholder' in data ? resolveString(data.style) : null;
-
-    this.options = resolveMenuOptions(this);
-
-    this.max_values = resolveMaxValues(this);
-
-    this.min_values = resolveMinValues(this);
-
-    this.options = [];
-    if ('option' in data) {
-      this.options.push(BaseMessageComponent.create(data.option));
+    constructor(data = {}) {
+        super({ type: 'SELECT_MENU' });
+        this.setup(data);
     }
 
-    if ('options' in data) {
-      data.options.map((c) => this.options.push(BaseMessageComponent.create((c.type = 'SELECT_MENU_OPTION'))));
+    setup(data) {
+
+        this.placeholder = 'placeholder' in data ? data.placeholder : null;
+
+        this.max_values = 'maxValues' in data | 'max_values' in data ? resolveMaxValues(data.maxValues, data.max_values) : undefined;
+
+        this.min_values = 'minValues' in data | 'min_values' in data ? resolveMinValues(data.minValues, data.min_values) : undefined;
+
+        this.options = [];
+        if ('option' in data) {
+            data.option.type = 'SELECT_MENU_OPTION';
+            this.options.push(BaseMessageComponent.create(data.option));
+        }
+
+        if ('options' in data) {
+            data.options.map((c) => {
+                c.type = 'SELECT_MENU_OPTION';
+                this.options.push(BaseMessageComponent.create(c))
+            });
+        }
+
+        if (('id' in data && data.id) || ('custom_id' in data && data.custom_id)) this.custom_id = data.id || data.custom_id;
+        else this.custom_id = undefined;
+
+        return this;
     }
 
-    if (('id' in data && data.id) || ('custom_id' in data && data.custom_id)) this.custom_id = data.id || data.custom_id;
-    else this.custom_id = undefined;
+    setPlaceholder(label) {
+        this.placeholder = label;
+        return this;
+    }
 
-    return this;
-  }
+    setID(id) {
+        this.custom_id = id;
+        return this;
+    }
 
-  addOption(option) {
-    this.options.push(BaseMessageComponent.create((option.type = 'SELECT_MENU_OPTION')));
-    return this;
-  }
+    setMaxValues(number) {
+        this.max_values = resolveMaxValues(number);
+        return this;
+    }
 
-  addOptions(...options) {
-    this.options.push(...options.flat(Infinity).map((c) => BaseMessageComponent.create((c.type = 'SELECT_MENU_OPTION'))));
-    return this;
-  }
+    setMinValues(number) {
+        this.min_values = resolveMinValues(number);
+        return this;
+    }
 
-  removeOptions(index, deleteCount, ...options) {
-    this.components.splice(index, deleteCount, ...options.flat(Infinity).map((c) => BaseMessageComponent.create((c.type = 'SELECT_MENU_OPTION'))));
-    return this;
-  }
+    addOption(option) {
+        option.type = 'SELECT_MENU_OPTION';
+        this.options.push(BaseMessageComponent.create(option));
+        return this;
+    }
 
-  setPlaceholder(label) {
-    label = resolveString(label);
-    this.label = label;
-    return this;
-  }
+    addOptions(...options) {
+        this.options.push(...options.flat(Infinity).map((c) => {
+            c.type = 'SELECT_MENU_OPTION';
+            BaseMessageComponent.create(c);
+        }));
+        return this;
+    }
 
-  toJSON() {
-    return {
-      type: MessageComponentTypes.SELECT_MENU,
-      placeholder: this.placeholder,
-      custom_id: this.custom_id,
-    };
-  }
+    removeOptions(index, deleteCount, ...options) {
+        this.components.splice(index, deleteCount, ...options.flat(Infinity).map((c) => {
+            c.type = 'SELECT_MENU_OPTION';
+            BaseMessageComponent.create(c);
+        }));
+        return this;
+    }
+
+    toJSON() {
+        return {
+            type: MessageComponentTypes.SELECT_MENU,
+            placeholder: this.placeholder,
+            custom_id: this.custom_id,
+            max_values: this.max_values,
+            min_values: this.min_values,
+            options: this.options
+        };
+    }
 }
 
 module.exports = MessageMenu;

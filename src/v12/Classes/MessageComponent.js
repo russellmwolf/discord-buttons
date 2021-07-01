@@ -5,10 +5,13 @@ const { InteractionReplyTypes } = require('../Constants');
 const { APIMessage } = require('./APIMessage');
 
 class MessageComponent {
-  constructor(client, data) {
+  constructor(client, data, menu) {
     this.client = client;
 
     this.id = data.data.custom_id;
+
+    if (menu)
+      this.values = data.data.values || [];
 
     this.version = data.version;
 

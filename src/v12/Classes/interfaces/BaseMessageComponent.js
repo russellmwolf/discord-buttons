@@ -7,8 +7,8 @@ class BaseMessageComponent {
   }
 
   static create(data) {
-    let component;
 
+    let component;
     if (typeof data.type === 'string' && !data.type === 'SELECT_MENU_OPTION') {
       type = MessageComponentTypes[type];
     }
@@ -16,22 +16,22 @@ class BaseMessageComponent {
     switch (data.type) {
       case MessageComponentTypes.ACTION_ROW: {
         const MessageActionRow = require('../MessageActionRow');
-        component = new MessageActionRow(data);
+        component = new MessageActionRow(data).toJSON();
         break;
       }
       case MessageComponentTypes.BUTTON: {
         const MessageButton = require('../MessageButton');
-        component = new MessageButton(data);
+        component = new MessageButton(data).toJSON();
         break;
       }
       case MessageComponentTypes.SELECT_MENU: {
         const MessageMenu = require('../MessageMenu');
-        component = new MessageMenu(data);
+        component = new MessageMenu(data).toJSON();
         break;
       }
       case 'SELECT_MENU_OPTION': {
         const MessageMenuOption = require('../MessageMenuOption');
-        component = new MessageMenuOption(data);
+        component = new MessageMenuOption(data).toJSON();
         break;
       }
     }

@@ -4,6 +4,7 @@ const TextChannel = require('./v12/Classes/TextChannel');
 const DMChannel = require('./v12/Classes/DMChannel');
 const NewsChannel = require('./v12/Classes/NewsChannel');
 const Message = require('./v12/Classes/Message');
+const { MessageComponentTypes } = require('./v12/Constants');
 
 var version = require('discord.js').version.split('');
 if (version.includes('(')) {
@@ -24,17 +25,24 @@ module.exports = (client) => {
   Structures.extend('Message', () => Message);
 
   client.ws.on('INTERACTION_CREATE', (data) => {
-    if (!data.message) return;
+    if (!data.data.component_type) return;
 
-    if (data.data.component_type) {
-      const button = new MessageComponent(client, data);
+    switch (data.data.component_type) {
+      case MessageComponentTypes.BUTTON:
+        client.emit('clickButton', new MessageComponent(client, data));
 
-      client.emit('clickButton', button);
+      case MessageComponentTypes.SELECT_MENU:
+        client.emit('clickMenu', new MessageComponent(client, data, true));
+
+      default:
+        client.emit('debug', `Got unknown interaction component type, ${data.data.component_type}`);
     }
   });
 };
 
 module.exports.MessageButton = require(`./v12/Classes/MessageButton`);
+module.exports.MessageMenu = require(`./v12/Classes/MessageMenu`);
+module.exports.MessageMenuOption = require(`./v12/Classes/MessageMenuOption`);
 module.exports.MessageActionRow = require('./v12/Classes/MessageActionRow');
 module.exports.ButtonInteraction = require('./v12/Classes/MessageComponent');
 module.exports.Message = require(`./v12/Classes/Message`);
