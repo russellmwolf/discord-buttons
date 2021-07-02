@@ -1,5 +1,6 @@
 const Message = require('discord.js').Structures.get('Message');
 const ButtonCollector = require('./ButtonCollector');
+const MenuCollector = require('./MenuCollector');
 const APIMessage = require('./APIMessage').APIMessage;
 const BaseMessageComponent = require('./interfaces/BaseMessageComponent');
 
@@ -26,6 +27,23 @@ class ExtendedMessage extends Message {
           reject(buttons);
         } else {
           resolve(buttons);
+        }
+      });
+    });
+  }
+
+  createMenuCollector(filter, options = {}) {
+    return new MenuCollector(this, filter, options);
+  }
+
+  awaitMenus(filter, options = {}) {
+    return new Promise((resolve, reject) => {
+      const collector = this.createMenuCollector(filter, options);
+      collector.once('end', (menus, reason) => {
+        if (options.errors && options.errors.includes(reason)) {
+          reject(menus);
+        } else {
+          resolve(menus);
         }
       });
     });

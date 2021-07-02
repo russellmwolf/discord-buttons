@@ -30,12 +30,15 @@ module.exports = (client) => {
     switch (data.data.component_type) {
       case MessageComponentTypes.BUTTON:
         client.emit('clickButton', new MessageComponent(client, data));
+        break;
 
       case MessageComponentTypes.SELECT_MENU:
         client.emit('clickMenu', new MessageComponent(client, data, true));
+        break;
 
       default:
         client.emit('debug', `Got unknown interaction component type, ${data.data.component_type}`);
+        break;
     }
   });
 };
