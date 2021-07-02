@@ -66,11 +66,7 @@ class MessageMenu extends BaseMessageComponent {
   }
 
   removeOptions(index, deleteCount, ...options) {
-    this.components.splice(
-      index,
-      deleteCount,
-      ...options.flat(Infinity).map((c) => new MessageMenuOption(c).toJSON()),
-    );
+    this.components.splice(index, deleteCount, ...options.flat(Infinity).map((c) => new MessageMenuOption(c).toJSON()));
     return this;
   }
 
