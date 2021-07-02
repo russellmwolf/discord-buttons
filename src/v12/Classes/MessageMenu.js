@@ -1,6 +1,7 @@
 const { MessageComponentTypes } = require('../Constants.js');
 const BaseMessageComponent = require('./interfaces/BaseMessageComponent');
-const { resolveMaxValues, resolveMinValues, verifyString } = require('../Util');
+const { resolveMaxValues, resolveMinValues } = require('../Util');
+const MessageMenuOption = require('./MessageMenuOption');
 
 class MessageMenu extends BaseMessageComponent {
   constructor(data = {}) {
@@ -23,8 +24,7 @@ class MessageMenu extends BaseMessageComponent {
 
     if ('options' in data) {
       data.options.map((c) => {
-        c.type = 'SELECT_MENU_OPTION';
-        this.options.push(BaseMessageComponent.create(c));
+        this.options.push(new MessageMenuOption(c).toJSON());
       });
     }
 
@@ -61,12 +61,7 @@ class MessageMenu extends BaseMessageComponent {
   }
 
   addOptions(...options) {
-    this.options.push(
-      ...options.flat(Infinity).map((c) => {
-        c.type = 'SELECT_MENU_OPTION';
-        BaseMessageComponent.create(c);
-      }),
-    );
+    this.options.push(...options.flat(Infinity).map((c) => new MessageMenuOption(c).toJSON()));
     return this;
   }
 
@@ -74,10 +69,7 @@ class MessageMenu extends BaseMessageComponent {
     this.components.splice(
       index,
       deleteCount,
-      ...options.flat(Infinity).map((c) => {
-        c.type = 'SELECT_MENU_OPTION';
-        BaseMessageComponent.create(c);
-      }),
+      ...options.flat(Infinity).map((c) => new MessageMenuOption(c).toJSON()),
     );
     return this;
   }

@@ -1,11 +1,8 @@
 const { MessageComponentTypes } = require('../Constants.js');
-const BaseMessageComponent = require('./interfaces/BaseMessageComponent');
 const { resolveString } = require('discord.js').Util;
-const { isEmoji } = require('../Util');
 
-class MessageMenuOption extends BaseMessageComponent {
+class MessageMenuOption {
   constructor(data = {}) {
-    super({ type: 'BUTTON' });
     this.setup(data);
   }
 

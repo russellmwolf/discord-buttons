@@ -22,10 +22,11 @@ client.on('message', async (message) => {
 
         let select = new disbut.MessageMenu()
             .setID('hey')
-            .addOption(option)
-            .addOption(reload)
+            .addOptions(option, reload)
             // .setMaxValues(2)
             .setPlaceholder('opla');
+
+        // console.log(select)
 
         let btn = new disbut.MessageButton().setLabel(' ').setID('id').setStyle('blurple').setEmoji('❌');
 

@@ -59,7 +59,7 @@ module.exports = {
 
     let options = this.resolveMenuOptions(data.options);
 
-    if (!options) throw new Error('NO_BUTTON_OPTIONS: Please provide at least one menu option');
+    if (options.length < 1) throw new Error('NO_BUTTON_OPTIONS: Please provide at least one menu option');
 
     let maxValues = this.resolveMaxValues(data.max_values);
     let minValues = this.resolveMinValues(data.min_values);
