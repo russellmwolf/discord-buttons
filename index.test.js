@@ -63,7 +63,7 @@ client.on('clickMenu', async (menu) => {
     }
 });
 
-client.login('Nzg0MDk5MTI1OTkzNjY4Njkw.X8kXNw.CsRzOqPJk8WWDxpxFllJxxusa_I');
+client.login('');
 
 function wait(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
