@@ -43,6 +43,42 @@ module.exports = (client) => {
   });
 };
 
+module.exports.multipleImport = (...clients) => {
+  if (version != 12) {
+    throw new Error('The discord.js version must be v12 or high');
+  }
+
+  const message = Structures.get('Message');
+
+  if (!message.createButtonCollector || typeof message.createButtonCollector !== 'function') {
+    Structures.extend('TextChannel', () => TextChannel);
+    Structures.extend('DMChannel', () => DMChannel);
+    Structures.extend('NewsChannel', () => NewsChannel);
+    Structures.extend('Message', () => Message);
+  }
+
+  clients.forEach((client) => {
+    if (!client || !client instanceof Client) throw new Error("INVALID_CLIENT_PROVIDED: The Discord.js Client isn't provided or it's invalid.");
+
+    client.ws.on('INTERACTION_CREATE', (data) => {
+      if (!data.data.component_type) return;
+
+      switch (data.data.component_type) {
+        case MessageComponentTypes.BUTTON:
+          client.emit('clickButton', new MessageComponent(client, data));
+          break;
+
+        case MessageComponentTypes.SELECT_MENU:
+          client.emit('clickMenu', new MessageComponent(client, data, true));
+          break;
+        default:
+          client.emit('debug', `Got unknown interaction component type, ${data.data.component_type}`);
+          break;
+      }
+    });
+  });
+};
+
 module.exports.MessageButton = require(`./v12/Classes/MessageButton`);
 module.exports.MessageMenu = require(`./v12/Classes/MessageMenu`);
 module.exports.MessageMenuOption = require(`./v12/Classes/MessageMenuOption`);

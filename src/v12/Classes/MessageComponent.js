@@ -39,6 +39,8 @@ class MessageComponent {
 
     this.message = new Message(client, data.message, this.channel);
 
+    this.reply = new InteractionReply(client, this, new WebhookClient(data.application_id, data.token, client.options));
+
     this.message.update = async function (content, options) {
       if (options === null && options !== undefined) options = { components: null };
 
@@ -54,10 +56,6 @@ class MessageComponent {
         },
       });
     };
-
-    this.webhook = new WebhookClient(data.application_id, data.token, client.options);
-
-    this.reply = new InteractionReply(client, this, this.webhook);
   }
 }
 
