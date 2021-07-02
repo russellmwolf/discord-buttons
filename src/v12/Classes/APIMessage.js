@@ -59,7 +59,7 @@ class sendAPICallback extends dAPIMessage {
       if (this.options.component instanceof MessageActionRow) {
         components.push({
           type: MessageComponentTypes.ACTION_ROW,
-          components: this.options.component.components.map((b) => BaseMessageComponent.create(Util.resolveButton(b))),
+          components: this.options.component.components.map((b) => BaseMessageComponent.create(b.type === MessageComponentTypes.BUTTON ? Util.resolveButton(b) : Util.resolveMenu(b))),
         });
       } else if (this.options.component instanceof MessageButton) {
         components.push({
@@ -203,7 +203,7 @@ class APIMessage extends dAPIMessage {
       if (this.options.component instanceof MessageActionRow) {
         components.push({
           type: MessageComponentTypes.ACTION_ROW,
-          components: this.options.component.components.map((b) => BaseMessageComponent.create(Util.resolveButton(b))),
+          components: this.options.component.components.map((b) => BaseMessageComponent.create(b.type === MessageComponentTypes.BUTTON ? Util.resolveButton(b) : Util.resolveMenu(b))),
         });
       } else if (this.options.component instanceof MessageButton) {
         components.push({

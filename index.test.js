@@ -33,7 +33,7 @@ client.on('message', async (message) => {
 
         let group2 = new disbut.MessageActionRow().addComponent(select);
 
-        let m = await message.channel.send('hi', { components: [group2, group1] });
+        let m = await message.channel.send('hi', { component: group2 });
 
         /*let collector = m.createMenuCollector((b) => b, { time: 10000 });
 

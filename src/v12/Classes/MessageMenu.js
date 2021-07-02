@@ -23,7 +23,6 @@ class MessageMenu extends BaseMessageComponent {
 
     if ('options' in data) {
       data.options.map((c) => {
-        if (!c) return;
         c.type = 'SELECT_MENU_OPTION';
         this.options.push(BaseMessageComponent.create(c));
       });
